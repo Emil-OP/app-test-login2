@@ -1,22 +1,30 @@
 @extends('layouts.app')
+@section('title', 'Administrar Perfiles')
 @section('content')
 <div class="container">
     <h2>Listado de Perfiles</h2>
+    {{-- @can('profile-create')
+        <a class="btn btn-success btn-sm mb-2" href="{{ route('profiles.create') }}"><i class="fa fa-plus"></i> Crear Nuevo Perfil</a>
+    @endcan --}}
     <table class="table table-bordered">
         <tr>
             <th>Cliente</th>
             <th>Teléfono</th>
-            <th>Dirección</th>
+            <th>Biografia</th>
             <th width="280px">Acción</th>
         </tr>
         @foreach ($profiles as $profile)
         <tr>
             <td>{{ $profile->client->nombre_cliente }}</td>
-            <td>{{ $profile->telefono }}</td>
-            <td>{{ $profile->direccion }}</td>
+            <td>{{ $profile->phone }}</td>
+            <td>{{ Str::limit($profile->biography, 50) }}</td>
             <td>
-                <a class="btn btn-info" href="{{ route('profiles.show',$profile->id) }}">Ver</a>
-                <a class="btn btn-primary" href="{{ route('profiles.edit',$profile->id) }}">Editar</a>
+                @can('profile-show')
+                <a class="btn btn-info" href="{{ route('profiles.show',$profile->client_id) }}">Ver</a>
+                @endcan
+                @can('profile-edit')
+                <a class="btn btn-primary" href="{{ route('profiles.edit',$profile->client_id) }}">Editar</a>
+                @endcan
             </td>
         </tr>
         @endforeach
