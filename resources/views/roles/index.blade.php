@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Roles del Sistema')
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
@@ -37,12 +37,16 @@
             @endcan
 
             @can('role-delete')
+            @if($role->id != 1)
             <form method="POST" action="{{ route('roles.destroy', $role->id) }}" style="display:inline">
                 @csrf
                 @method('DELETE')
 
                 <button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i> Delete</button>
             </form>
+            @else
+                <span class="badge bg-secondary">Protegido</span>
+            @endif
             @endcan
         </td>
     </tr>
