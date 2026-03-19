@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Administrar Clientes')
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
@@ -29,7 +29,7 @@
     </tr>
     @foreach ($clients as $client)
     <tr>
-        <td>{{ ++$i }}</td>
+        <td>{{ ($clients->currentPage() - 1) * $clients->perPage() + $loop->iteration }}</td>
         <td>{{ $client->cedula }}</td>
         <td>{{ $client->nombre_cliente }}</td>
         <td>
