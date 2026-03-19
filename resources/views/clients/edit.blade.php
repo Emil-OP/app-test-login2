@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Administrar Clientes')
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
@@ -37,7 +37,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Nombre del Cliente:</strong>
-                <textarea class="form-control" style="height:150px" name="nombre_cliente" placeholder="Nombre del Cliente">{{ $client->nombre_client }}</textarea>
+                <input type="text" class="form-control" value="{{ $client->nombre_cliente}}" name="nombre_cliente" placeholder="Nombre del Cliente">{{ $client->nombre_client }}</textarea>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
