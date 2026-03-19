@@ -12,13 +12,13 @@ class OrderController extends Controller
     public function index()
     {
         // Trae todas las órdenes con cliente y producto
-        $orders = Order::withh(['client','product'])->get();
+        $orders = Order::with(['client','product'])->get();
         return view('orders.index', compact('orders'));
     }
 
     public function create()
     {
-        $clients = Clients::all();
+        $clients = Client::all();
         $products = Product::all();
         return view('orders.create', compact('clients','products'));
     }
