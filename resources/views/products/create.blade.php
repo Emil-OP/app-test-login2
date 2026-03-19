@@ -1,20 +1,20 @@
 @extends('layouts.app')
-
+@section('title', 'Productos del Sistema')
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Agregar Nuevo Cliente</h2>
+            <h2>Agregar Nuevo Producto</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary btn-sm" href="{{ route('clients.index') }}"><i class="fa fa-arrow-left"></i> Back</a>
+            <a class="btn btn-primary btn-sm" href="{{ route('products.index') }}"><i class="fa fa-arrow-left"></i> Back</a>
         </div>
     </div>
 </div>
 
 @if ($errors->any())
     <div class="alert alert-danger">
-        <strong>Whoops!</strong> Se presentó un error al crear el cliente.<br><br>
+        <strong>Whoops!</strong> Se presentó un error al crear el producto.<br><br>
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
@@ -23,20 +23,20 @@
     </div>
 @endif
 
-<form action="{{ route('clients.store') }}" method="POST">
+<form action="{{ route('products.store') }}" method="POST">
     @csrf
 
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Cedula:</strong>
-                <input type="text" cedula="cedula" class="form-control" placeholder="Cedula">
+                <strong>Nombre:</strong>
+                <input type="text" name="name" class="form-control" placeholder="Nombre">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Nombre del Cliente:</strong>
-                <textarea class="form-control" style="height:150px" name="nombre_cliente" placeholder="Nombre del cliente"></textarea>
+                <strong>Precio del producto:</strong>
+                <input type="number" step="0.01" class="form-control" name="price" placeholder="Precio del producto">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
@@ -45,5 +45,5 @@
     </div>
 </form>
 
-<p class="text-center text-primary"><small>Error al crear el nuevo cliente</small></p>
+<p class="text-center text-primary"><small>Error al crear el nuevo producto</small></p>
 @endsection
