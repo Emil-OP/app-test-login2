@@ -23,7 +23,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Roles y Permisos
+                    @yield('title', 'Reto Programacion')
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -51,15 +51,39 @@
                                 </li>
                             @endif
                         @else
-                            <li><a class="nav-link" href="{{ route('users.index') }}">Administrar Usuarios</a></li>
-                            <li><a class="nav-link" href="{{ route('roles.index') }}">Administrar Roles</a></li>
-                            <li><a class="nav-link" href="{{ route('clients.index') }}">Administrar Clientes</a></li>
-                            <li><a class="nav-link" href="{{ route('orders.index') }}">Administrar Pedidos</a></li>
-                            <li><a class="nav-link" href="{{ route('products.index') }}">Administrar Productos</a></li>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdownVentas" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <i class="fa-solid fa-cart-shopping"></i> Ventas
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownVentas">
+                                    <a class="dropdown-item" href="{{ route('clients.index') }}">Clientes</a>
+                                    <a class="dropdown-item" href="{{ route('products.index') }}">Productos</a>
+                                    <a class="dropdown-item" href="{{ route('orders.index') }}">Pedidos</a>
+                                </div>
+                            </li>
+
+                            @canany(['role-list', 'user-list'])
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdownAdmin" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <i class="fa-solid fa-gears"></i> Administración
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownAdmin">
+                                    @can('user-list')
+                                        <a class="dropdown-item" href="{{ route('users.index') }}">Administrar Usuarios</a>
+                                    @endcan
+                                    @can('role-list')
+                                        <a class="dropdown-item" href="{{ route('roles.index') }}">Administrar Roles</a>
+                                    @endcan
+                                    @can('profile-list')
+                                        <a class="dropdown-item" href="{{ route('profiles.index') }}">Administrar Perfiles</a>
+                                    @endcan
+                                </div>
+                            </li>
+                            @endcanany
 
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    <i class="fa-solid fa-user"></i> {{ Auth::user()->name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
