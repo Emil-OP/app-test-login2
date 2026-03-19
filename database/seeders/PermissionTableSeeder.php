@@ -18,14 +18,29 @@ class PermissionTableSeeder extends Seeder
            'role-create',
            'role-edit',
            'role-delete',
+           'profile-list',
+           'profile-create',
+           'profile-edit',
+           'profile-delete',
            'client-list',
            'client-create',
            'client-edit',
-           'client-delete'
+           'client-delete',
         ];
 
         foreach ($permissions as $permission) {
-             Permission::create(['name' => $permission]);
+            Permission::firstOrCreate(['name' => $permission, 'guard_name' => 'web']);
+        }
+
+        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+
+ 
+        $adminRole = \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'admin']);
+        $adminRole->syncPermissions(\Spatie\Permission\Models\Permission::all());
+
+        $user = \App\Models\User::find(1);
+        if ($user) {
+            $user->assignRole($adminRole);
         }
     }
 }
