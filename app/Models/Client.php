@@ -29,4 +29,4 @@ class Client extends Model
     
 
 }
-}
+
