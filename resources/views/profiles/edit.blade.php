@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Administrar Perfiles')
 @section('content')
 <div class="container">
     <h2>Editar Perfil de: {{ $profile->client->nombre_cliente }}</h2>
