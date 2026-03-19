@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Usuarios del Sistema')
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
