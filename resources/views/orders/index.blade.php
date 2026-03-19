@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Gestión de Pedidos')
 @section('content')
 <div class="container">
     <div class="row">
@@ -14,16 +15,17 @@
         <tr>
             <th>ID</th>
             <th>Cliente</th>
-            <th>Producto</th>
+            <th>Total</th>
             
             <th width="280px">Acción</th>
         </tr>
         @foreach ($orders as $order)
+
         <tr>
             <td>{{ $order->id }}</td>
             
-            <td>{{ $order->descripcion }}</td>
-            <td>${{ number_format($order->monto, 2) }}</td>
+            <td>{{ $order->client->nombre_cliente }}</td>
+            <td>${{ number_format($order->quantity * $order->product->price, 2) }}</td>
             <td>
                 <form action="{{ route('orders.destroy',$order->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('orders.show',$order->id) }}">Ver</a>
